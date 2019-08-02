@@ -9,7 +9,7 @@ bashcompinit
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="pygmalion"
+ZSH_THEME="cloud"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,32 +49,10 @@ ZSH_THEME="pygmalion"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws colorize common-aliases compleat git git-extras history jira ssh-agent tmux tmuxinator zsh-syntax-highlighting)
-
-# Setup ssh-agent.
-if [ "$(uname)" = "Linux" ]; then
-  zstyle :omz:plugins:ssh-agent identities id_rsa
-  zstyle :omz:plugins:ssh-agent lifetime 4h
-fi
-
-source $ZSH/oh-my-zsh.sh
-
-# Color settings.
-source "$HOME/.dotfiles/vim/vim.symlink/plugged/gruvbox/gruvbox_256palette.sh"
+plugins=(git)
 
 # User configuration.
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
-
-# Set tmuxinator env.
-export EDITOR=vim
-alias mux="tmuxinator"
-
-# Alias for ag (The Silver Searcher).
-alias ag='\ag --pager="less -XFR"'
-alias sag='\sag --pager="less -XFR"'
-
-# Add path for dotfiles bin folder.
-export PATH=$HOME/.dotfiles/bin:$PATH
 
 # Add path for Drush.
 export PATH=$HOME/.composer/vendor/bin:$PATH
@@ -83,54 +61,10 @@ export PATH=$HOME/.config/composer/vendor/bin:$PATH
 # Drush autocomplete.
 source ~/.dotfiles/drush/drush.complete.sh
 
-# Add env var for local meteor packages.
-export PACKAGE_DIRS="$HOME/Projects/Community/Meteor/meteor-packages"
-
 # export MANPATH="/usr/local/man:$MANPATH"
-
-# Extra completions.
-fpath=(~/.dotfiles/zsh/zsh-completions/src $fpath)
-
-# This alias is to prevent some OS X related tmux issues (If I remember correctly).
-alias tmux="tmux -2"
-
-# Kill all tmux sessions.
-alias kts="tmux kill-server"
-
-# My standard drush coder setup as an alias.
-alias phpcs="phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme"
-alias phpcbf="phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme"
-
-# Docker4Drupal Drush aliases for Drupal 7 and Drupal 8.
-alias drushd4d7="docker-compose exec --user 82 php drush --root=/var/www/html"
-alias drushd4d8="docker-compose exec --user 82 php drush --root=/var/www/html/web"
-
-# Allowing opening of Sublime Text 3 in tmux sessions
-alias subl="reattach-to-user-namespace subl"
-
-# Load nvm.
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Fix for drush aliases with Acquia Dev Desktop
 export DEVDESKTOP_DRUPAL_SETTINGS_DIR="$HOME/.acquia/DevDesktop/DrupalSettings"
 
-# Go lang paths.
-export GOPATH=$HOME/golang
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-
-# Brew PHP binary added to paths.
-export PATH="/usr/local/opt/php@7.1/bin:$PATH"
-export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
-
 # Brew paths.
 export PATH="/usr/local/sbin:$PATH"
-
-# Ruby paths.
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-
-# Flutter path.
-export PATH="$HOME/bin/flutter/bin:$PATH"
