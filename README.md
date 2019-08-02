@@ -1,6 +1,6 @@
 ## There's no place like ~/
 
-These are my dotfiles. They started as a fork of [pengwynn's dotfiles](https://github.com/pengwynn/dotfiles)
+These are my dotfiles. I started mine as a fork of shrop's dotfiles, which started as a fork of [pengwynn's dotfiles](https://github.com/pengwynn/dotfiles)
 
 Dependencies to install via Homebrew, apt, or from source
 
