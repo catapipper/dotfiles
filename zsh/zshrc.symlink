@@ -49,7 +49,7 @@ ZSH_THEME="cloud"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git composer zsh-syntax-highlighting)
 
 # User configuration.
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
@@ -68,3 +68,6 @@ export DEVDESKTOP_DRUPAL_SETTINGS_DIR="$HOME/.acquia/DevDesktop/DrupalSettings"
 
 # Brew paths.
 export PATH="/usr/local/sbin:$PATH"
+
+# ZSH Completions
+fpath=(/usr/local/share/zsh-completions $fpath)
