@@ -108,16 +108,6 @@ install_dotfiles () {
 setup_gitconfig
 install_dotfiles
 
-# Install zsh syntax highlighting.
-if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-fi
-
-# Download gruvbox for iTerm2.
-if [ ! -f ~/bin/gruvbox-dark.itermcolors ]; then
-  cd ~/bin && wget https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/iterm2/gruvbox-dark.itermcolors
-fi
-
 # Install homebrew and OS X specific apps.
 if [ $(uname) == "Darwin" ]; then
   if ! which brew >/dev/null; then
@@ -127,11 +117,16 @@ if [ $(uname) == "Darwin" ]; then
   /usr/local/bin/brew upgrade
   /usr/local/bin/brew install git
   /usr/local/bin/brew install cask
+fi
 
-  # Install zsh syntax highlighting.
-  if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-  fi
+# Install zsh syntax highlighting.
+if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+
+# Download Material design for iTerm2.
+if [ ! -f ~/bin/material-design-colors.itermcolors ]; then
+  cd ~/bin && wget https://raw.githubusercontent.com/MartinSeeler/iterm2-material-design/master/material-design-colors.itermcolors
 fi
 
 # Install Composer.
@@ -142,16 +137,8 @@ if [ $(uname) == "Darwin" ]; then
   else sudo mv composer.phar /usr/local/bin/composer
 fi
 
-# Install Drupal Console
-curl https://drupalconsole.com/installer -L -o drupal.phar
-mv drupal.phar /usr/local/bin/drupal
-chmod +x /usr/local/bin/drupal
-drupal init --override
-drupal check
-
 # Install Composer project dependencies.
 composer global require hirak/prestissimo \
-drush/drush:^8.1.0 \
 drush/config-extra \
 pantheon-systems/terminus \
 squizlabs/php_codesniffer \
@@ -160,6 +147,13 @@ drupal/coder
 
 # Run Composer global update.
 composer global update
+
+# Install Drupal Console
+curl https://drupalconsole.com/installer -L -o drupal.phar
+mv drupal.phar /usr/local/bin/drupal
+chmod +x /usr/local/bin/drupal
+drupal init --override
+drupal check
 
 if [ ! -d "$HOME/.drush" ]; then
   mkdir -p $HOME/.drush
