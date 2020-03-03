@@ -117,6 +117,19 @@ if [ $(uname) == "Darwin" ]; then
   /usr/local/bin/brew upgrade
   /usr/local/bin/brew install git
   /usr/local/bin/brew install cask
+  # Install applications
+  brew cask install slack
+  brew cask install iterm2
+  brew cask install sublime-text
+  brew cask install atom
+  brew cask install spotify
+  brew cask install sequel-pro
+  brew cask install codekit
+  brew cask install flux
+  brew cask install dropbox
+  brew cask install postman
+  brew cask install acquia-dev
+  brew cask install github
 fi
 
 # Install zsh syntax highlighting.
@@ -148,18 +161,31 @@ drupal/coder
 # Run Composer global update.
 composer global update
 
+# Install Drush.
+if [ $(uname) == "Darwin" ]
+  then
+    curl -OL https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
+    chmod +x drush.phar
+    mv drush.phar /usr/local/bin/drush
+  else
+    wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
+    chmod +x drush.phar
+    sudo mv composer.phar /usr/local/bin/composer
+fi
+
+drush self-update
+
+# Install Drupal Check
+curl -O -L https://github.com/mglaman/drupal-check/releases/latest/download/drupal-check.phar
+mv drupal-check.phar $HOME/bin/drupal-check
+chmod +x $HOME/bin/drupal-check
+
 # Install Drupal Console
 curl https://drupalconsole.com/installer -L -o drupal.phar
 mv drupal.phar /usr/local/bin/drupal
 chmod +x /usr/local/bin/drupal
 drupal init --override
 drupal check
-
-if [ ! -d "$HOME/.drush" ]; then
-  mkdir -p $HOME/.drush
-fi
-
-drush cc drush
 
 echo ''
 echo '  All installed!'
